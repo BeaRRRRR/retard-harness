@@ -1,0 +1,137 @@
+/* Dino game resizable sidebar panel with mini browser. */
+.panel {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--dsw-alias-bg-base, #ffffff);
+  border-left: 1px solid var(--dsw-alias-border-l2, rgba(0, 0, 0, 0.08));
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+  z-index: 25;
+  transition: border-color 0.15s ease;
+}
+.panelFocused { border-left-color: var(--dsw-alias-state-business-primary, #2563eb); }
+
+/* Panel width drag handle */
+.dragHandle {
+  position: absolute; left: -4px; top: 0; bottom: 0; width: 8px;
+  cursor: col-resize; z-index: 26;
+}
+.dragHandle::after {
+  content: ''; position: absolute; left: 3px; top: 50%; transform: translateY(-50%);
+  width: 2px; height: 32px; border-radius: 1px;
+  background: var(--dsw-alias-border-l2, rgba(0, 0, 0, 0.08));
+  transition: background 0.15s ease;
+}
+.dragHandle:hover::after { background: var(--dsw-alias-state-business-primary, #2563eb); }
+
+/* Header */
+.panelHeader {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.06));
+  background: var(--dsw-alias-bg-base, #ffffff);
+  flex-shrink: 0; gap: 8px;
+}
+
+/* Game selector */
+.gameSelector { position: relative; flex: 1; min-width: 0; }
+.selectorButton {
+  appearance: none; border: 1px solid var(--dsw-alias-border-l2, rgba(0, 0, 0, 0.08));
+  background: var(--dsw-alias-bg-base, #ffffff); cursor: pointer;
+  font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 6px;
+  display: flex; align-items: center; gap: 4px;
+  color: var(--dsw-alias-label-primary, #1f2937);
+  transition: border-color 0.1s ease; width: 100%; text-align: left;
+}
+.selectorButton:hover { border-color: var(--dsw-alias-state-business-primary, #2563eb); }
+.selectorArrow { margin-left: auto; font-size: 11px; color: var(--dsw-alias-label-tertiary, #9ca3af); }
+
+.dropdown {
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+  background: var(--dsw-alias-bg-base, #ffffff);
+  border: 1px solid var(--dsw-alias-border-l2, rgba(0, 0, 0, 0.12));
+  border-radius: 8px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 30; overflow: hidden;
+}
+.dropdownItem {
+  appearance: none; border: none; background: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 8px 12px; font-size: 13px;
+  color: var(--dsw-alias-label-primary, #1f2937); text-align: left;
+  transition: background 0.1s ease;
+}
+.dropdownItem:hover:not(:disabled) { background: var(--dsw-alias-interactive-bg-hover, rgba(0, 0, 0, 0.04)); }
+.dropdownItemActive { font-weight: 600; }
+.dropdownItemDisabled { opacity: 0.5; cursor: default; }
+.comingSoon { font-size: 11px; color: var(--dsw-alias-label-caption, #9ca3af); font-weight: 400; }
+
+.closeButton {
+  appearance: none; border: none; background: none; cursor: pointer;
+  font-size: 18px; line-height: 1; padding: 2px 6px; border-radius: 4px;
+  color: var(--dsw-alias-label-tertiary, #9ca3af); flex-shrink: 0;
+  transition: background 0.1s ease, color 0.1s ease;
+}
+.closeButton:hover { background: var(--dsw-alias-interactive-bg-hover, rgba(0, 0, 0, 0.04)); color: var(--dsw-alias-label-primary, #1f2937); }
+
+/* Split body: game on top, browser on bottom */
+.splitBody {
+  flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative;
+}
+.splitTop { overflow: hidden; display: flex; flex-direction: column; padding: 8px; }
+.splitBottom { overflow: hidden; display: flex; flex-direction: column; }
+
+/* Split drag handle (horizontal) */
+.splitHandle {
+  height: 6px; cursor: row-resize; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.06));
+  transition: background 0.15s ease; position: relative; z-index: 2;
+}
+.splitHandle::after {
+  content: ''; width: 24px; height: 2px; border-radius: 1px;
+  background: var(--dsw-alias-border-l2, rgba(0, 0, 0, 0.12));
+  transition: background 0.15s ease;
+}
+.splitHandle:hover { background: var(--dsw-alias-state-business-primary, #2563eb); }
+.splitHandle:hover::after { background: #fff; }
+
+/* Bottom split: video container — crop-fills the space (object-fit: cover). */
+.splitBottom {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  flex: 1; min-height: 0;
+}
+
+/* The 16:9 YouTube iframe is oversized to cover the container's height and
+   centered, so its sides crop instead of leaving letterbox bars. */
+.videoIframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  width: auto;
+  min-width: 100%;
+  border: 0;
+  display: block;
+  pointer-events: none;
+}
+
+/* Coming soon placeholder */
+.comingSoonPlaceholder {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px; opacity: 0.5;
+}
+.comingSoonIcon { font-size: 48px; }
+.comingSoonText { font-size: 18px; font-weight: 600; color: var(--dsw-alias-label-primary, #1f2937); }
+.comingSoonSubtext { font-size: 13px; color: var(--dsw-alias-label-caption, #9ca3af); }
+
+.clickHint {
+  text-align: center; font-size: 11px; padding: 6px 0;
+  color: var(--dsw-alias-label-caption, #9ca3af);
+  border-top: 1px solid var(--dsw-alias-border-l1, rgba(0, 0, 0, 0.06));
+  flex-shrink: 0;
+}

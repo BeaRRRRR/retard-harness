@@ -1,0 +1,62 @@
+/* Dino game component — lives inside the sidebar panel body. */
+.game {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: var(--dsw-alias-bg-base, #ffffff);
+  transition: border-color 0.15s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.gameFocused {
+  border-color: var(--dsw-alias-state-business-primary, #2563eb);
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--dsw-alias-label-primary, #1f2937);
+}
+
+.score {
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+  color: var(--dsw-alias-label-tertiary, #9ca3af);
+}
+
+.canvas {
+  display: block;
+  border-radius: 4px;
+  touch-action: manipulation;
+}
+
+.hint {
+  text-align: center;
+  font-size: 11px;
+  color: var(--dsw-alias-label-caption, #9ca3af);
+}
+
+.done {
+  text-align: center;
+  font-size: 11px;
+  color: var(--dsw-alias-state-business-primary, #2563eb);
+  font-weight: 500;
+}
+
+.focusIndicator {
+  height: 3px;
+  border-radius: 2px;
+  background: var(--dsw-alias-state-business-primary, #2563eb);
+  margin-top: 4px;
+}
