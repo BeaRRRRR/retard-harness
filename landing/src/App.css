@@ -92,7 +92,39 @@ a:hover { text-decoration: underline; }
 .card h3 { font-size: 18px; margin-bottom: 8px; }
 .card p { color: var(--muted); font-size: 14px; }
 
-/* Install */
+/* Install (top, agent prompt) */
+.installTop { padding: 24px 0 48px; max-width: 760px; margin: 0 auto; }
+.installTop h2 { font-size: 30px; margin-bottom: 10px; text-align: center; }
+.installTop .sub { text-align: center; margin: 0 auto 26px; }
+
+.promptBox {
+  background: #0a0e16; border: 1px solid #2c3a55; border-radius: 14px;
+  padding: 16px 18px;
+}
+.promptBoxHead {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 12px; flex-wrap: wrap;
+}
+.promptBoxLabel { color: var(--muted); font-size: 13px; font-weight: 600; letter-spacing: 0.02em; }
+.copyBtn {
+  appearance: none; border: none; cursor: pointer;
+  background: var(--primary); color: #fff;
+  font-weight: 700; font-size: 14px;
+  padding: 9px 18px; border-radius: 10px;
+  transition: background 0.15s ease, transform 0.1s ease;
+  white-space: nowrap;
+}
+.copyBtn:hover { background: var(--primary-hover); }
+.copyBtn:active { transform: scale(0.97); }
+.copyBtn.copied { background: #16a34a; }
+.promptText {
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 13px; line-height: 1.7; color: #cdd6e4;
+  white-space: pre-wrap; overflow-x: auto;
+}
+.promptBoxFoot { color: var(--muted); font-size: 12px; margin-top: 10px; }
+
+/* Install (manual, lower) */
 .install { padding: 48px 0; max-width: 760px; margin: 0 auto; }
 .install h2 { font-size: 32px; margin-bottom: 12px; text-align: center; }
 .codeBlock {

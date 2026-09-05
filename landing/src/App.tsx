@@ -1,3 +1,49 @@
+import { useCallback, useState } from 'react'
+import type { ReactNode } from 'react'
+
+/** The one-prompt install: paste into Claude/Cursor and the agent does the rest. */
+const AGENT_PROMPT = [
+  'Install and run retard-harness for me:',
+  '1. git clone https://github.com/BeaRRRRR/retard-harness.git',
+  '2. cd retard-harness && pnpm install',
+  '3. Run `pnpm dsh web` and open the printed localhost URL in my browser.',
+  'It needs Node 22+ and pnpm. Once it is running, guide me through adding my DeepSeek API key.',
+].join('\n')
+
+/** One-click copy box for the agent prompt, with copied feedback. */
+function CopyPrompt(): ReactNode {
+  const [copied, setCopied] = useState(false)
+
+  const onCopy = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(AGENT_PROMPT)
+    } catch {
+      // Clipboard API can be denied on http:// — fall back to a textarea exec.
+      const ta = document.createElement('textarea')
+      ta.value = AGENT_PROMPT
+      document.body.appendChild(ta)
+      ta.select()
+      document.execCommand('copy')
+      document.body.removeChild(ta)
+    }
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }, [])
+
+  return (
+    <div className="promptBox">
+      <div className="promptBoxHead">
+        <span className="promptBoxLabel">Paste this into Claude · Cursor · your agent</span>
+        <button type="button" className={`copyBtn ${copied ? 'copied' : ''}`} onClick={onCopy}>
+          {copied ? '✓ Copied' : 'Copy prompt'}
+        </button>
+      </div>
+      <pre className="promptText">{AGENT_PROMPT}</pre>
+      <div className="promptBoxFoot">One prompt. Zero terminal skills required. Your agent handles the rest.</div>
+    </div>
+  )
+}
+
 export default function App() {
   const cloneCmd = 'git clone https://github.com/BeaRRRRR/retard-harness.git'
   const installCmd = 'pnpm install'
@@ -32,6 +78,15 @@ export default function App() {
         <div className="heroPreview">
           <img src="/preview.png" alt="Dino game and brainrot video next to the chat" />
         </div>
+      </section>
+
+      <section id="install" className="installTop">
+        <h2>Let your agent install it</h2>
+        <p className="sub">
+          No terminal wizardry. Copy one prompt, paste it into your AI agent,
+          and come back when the dino is jumping.
+        </p>
+        <CopyPrompt />
       </section>
 
       <section id="preview" className="previewFull">
@@ -79,11 +134,10 @@ export default function App() {
         </div>
       </section>
 
-      <section id="install" className="install">
-        <h2>Run it yourself</h2>
+      <section className="install">
+        <h2>Prefer doing it by hand?</h2>
         <p className="sub">
-          It's a fork of DeepSeek Harness, so you get the full agent harness plus the distraction panel.
-          Run it on your own machine — it needs Node 22+ and pnpm.
+          Four commands. Node 22+ and pnpm required.
         </p>
         <div className="codeBlock">
           <div className="codeLine"><span className="prompt">$</span> {cloneCmd}</div>
