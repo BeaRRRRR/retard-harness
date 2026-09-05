@@ -3,11 +3,12 @@ import type { ReactNode } from 'react'
 
 /** The one-prompt install: paste into Claude/Cursor and the agent does the rest. */
 const AGENT_PROMPT = [
-  'Install and run retard-harness for me:',
-  '1. git clone https://github.com/BeaRRRRR/retard-harness.git',
-  '2. cd retard-harness && pnpm install',
-  '3. Run `pnpm dsh web` and open the printed localhost URL in my browser.',
-  'It needs Node 22+ and pnpm. Once it is running, guide me through adding my DeepSeek API key.',
+  'Install and run retard-harness for me (a fork of DeepSeek Harness):',
+  '1. git clone https://github.com/BeaRRRRR/retard-harness.git and cd into the cloned folder.',
+  '2. Environment requirements: Node.js ^22.19.0 || >=24.0.0, and pnpm@11.7.0 (enable via `corepack enable pnpm`, or `npm i -g pnpm` if corepack is unavailable).',
+  '   If my installed Node does not satisfy that range, install a matching one with the `n` version manager (`npm i -g n` first if missing, then `n 22`).',
+  '3. pnpm install',
+  '4. Run `pnpm dsh web`, open the printed localhost URL in my browser, and guide me through adding my DeepSeek API key.',
 ].join('\n')
 
 /** One-click copy box for the agent prompt, with copied feedback. */
