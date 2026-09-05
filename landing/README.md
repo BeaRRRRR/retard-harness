@@ -5,7 +5,7 @@ A silly fork of [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harne
 ## Run it
 
 ```sh
-git clone https://github.com/YOUR_USERNAME/retard-harness.git
+git clone https://github.com/BeaRRRRR/retard-harness.git
 cd retard-harness
 pnpm install
 pnpm dsh web
@@ -33,4 +33,3 @@ pnpm run dev
 ## Notes
 
 - The harness itself runs locally (it's a backend agent, not a static site). The landing page is the static marketing page.
-- Replace `YOUR_USERNAME` in `App.tsx` (clone URL) and the nav GitHub link with your actual username before shipping.

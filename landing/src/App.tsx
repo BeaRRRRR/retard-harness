@@ -1,5 +1,5 @@
 export default function App() {
-  const cloneCmd = 'git clone https://github.com/YOUR_USERNAME/retard-harness.git'
+  const cloneCmd = 'git clone https://github.com/BeaRRRRR/retard-harness.git'
   const installCmd = 'pnpm install'
   const runCmd = 'pnpm dsh web'
 
@@ -12,7 +12,7 @@ export default function App() {
           <a href="#install">Install</a>
           <a href="#about">About</a>
         </nav>
-        <a className="btn primary small" href="https://github.com/YOUR_USERNAME/retard-harness">GitHub</a>
+        <a className="btn primary small" href="https://github.com/BeaRRRRR/retard-harness">GitHub</a>
       </header>
 
       <section className="hero">
@@ -107,7 +107,7 @@ export default function App() {
 
       <footer className="footer">
         <span>retard-harness · a silly fork of DeepSeek Harness</span>
-        <span><a href="https://github.com/YOUR_USERNAME/retard-harness" target="_blank" rel="noreferrer">Star it ⭐</a></span>
+        <span><a href="https://github.com/BeaRRRRR/retard-harness" target="_blank" rel="noreferrer">Star it ⭐</a></span>
       </footer>
     </div>
   )
